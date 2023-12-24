@@ -1,0 +1,10 @@
+{
+  "name": "advent-of-typescript-2023",
+  "version": "1.0.0",
+  "private": true,
+  "author": "Alex Grad",
+  "devDependencies": {
+    "type-testing": "^0.2.0",
+    "typescript": "^5.3.3"
+  }
+}
