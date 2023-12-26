@@ -7,25 +7,18 @@
 // ░░░░#░░░#░░░#░░░#░░░#░░░
 // ░░#░░░#░░░#░░░#░░░#░░░#░
 // ░░░░#░░░#░░░#░░░#░░░#░░░
-type Forest = string[][]
+type Forest = string[][];
 
-type FindSanta<TForest extends Forest> = FindSantaRow<TForest>
-
-type FindSantaRow<TForest extends Forest, $Key = keyof TForest> =
-  $Key extends `${infer $RowIndex extends number}`
-    ? FindSantaColumn<TForest, $RowIndex>
-    : never
-
-type FindSantaColumn<
-  TForest extends Forest,
-  TRowIndex extends number,
-  $Key = keyof TForest[TRowIndex]
-> =
-  $Key extends `${infer $ColumnIndex extends number}`
-    ? TForest[TRowIndex][$ColumnIndex] extends "🎅🏼"
-      ? [TRowIndex, $ColumnIndex]
-      : never
-    : never
+type FindSanta<F extends Forest> =
+  keyof F extends infer I extends keyof F ?
+    I extends `${infer Y extends number}` ?
+      keyof F[I] extends infer J extends keyof F[I] ?
+        J extends `${infer X extends number}` ?
+          F[Y][X] extends "🎅🏼" ? [Y, X] : never :
+        never :
+      never :
+    never :
+  never;
 
 // ░░░░#░░░#░░░#░░░#░░░#░░░
 // ░░#░░░#░░░#░░░#░░░#░░░#░
